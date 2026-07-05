@@ -519,7 +519,7 @@ FRM.scanSnapshot = function(snapshot, minLen = 4) {
   return hits;
 };
 
-// To je isti postopek kot tisti, ki je za (7,3) dal 623rottenoranges.
+// To je isti postopek kot tisti, ki je za (7,3) dal ustrezen password.
 FRM.scanPrimer = async function(primer, opts = {}) {
   const anchor = opts.anchor || { x: 9, y: 8 };
   const minLen = opts.minLen || 4;
