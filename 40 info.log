@@ -1,0 +1,62 @@
+--------------------------------------------------------------------
+grok reads a cell and does a thing
+munge does a thing.
+munge and grok both have an operation in common
+--------------------------------------------------------------------
+
+
+munge uporablja isti skriti observer register, ki ga nastavlja grok
+
+anchor = (9,8)
+anchorValue = 0xc4
+
+Invariant :
+col7 + anchor c4 + 3-char prefix + sadni/adjective payload + XOR observer state
+
+
+grok je XOR observer, ki nastavi skriti previous-cell register.
+munge uporablja isti register.
+
+Berljivi nizi so v relativnem dumpu pri anchorju 0xc4, stolpec x=7.
+Nizi imajo obliko: 3-mestni prefix + pridevnik/stanje + sadje.
+Ker se rezultat začne pri (7,3), sva s grok(7,3) nastavila register.
+Po munge se isti stolpec transformira v končni password.
+
+
+observation = previous XOR current    [grok]
+observation = raw(x,y) XOR raw(x,y)   [grok]
+observation = 00					  [munge]
+
+
+beri stolpec x = 7 navpično
+format = 3 znaki prefixa + opis (pridevnik stanja) + sadje
+
+prefix tipa XXX  ; X ∈ (0...9)
+opis stanja (string)
+sadje (string)
+
+Primer: {x: 7, y: 0} anchor: {x: 9, y: 8}
+260goodcherries
+Primer: {x: 7, y: 1} anchor: {x: 9, y: 8}
+715ripepineapples
+Primer: {x: 7, y: 2} anchor: {x: 9, y: 8}
+789deliciousapples
+Primer: {x: 7, y: 3} anchor: {x: 9, y: 8}
+908badoranges
+Primer: {x: 7, y: 4} anchor: {x: 9, y: 8}
+489rottencarrots
+Primer: {x: 8, y: 0} anchor: {x: 9, y: 8}
+228blandpears
+Primer: {x: 8, y: 1} anchor: {x: 9, y: 8}
+.
+.
+.
+.
+
+
+grok(7,3) -> nastavi register
+munge()   -> uporabi register
+col7      -> razkrije password
+submit    -> odklene level 41
+
+
